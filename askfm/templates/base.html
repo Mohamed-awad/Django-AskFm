@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %} AskFm Website {% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  {% include 'navbar.html' %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        {% block content %}
+        {% endblock %}
+      </div>
+      <div class="col-md-4">
+        <h3 style="margin-top: 70px;" class="page-header">Mohamed Awad Blog</h3>
+        <p><a href="{% if request.user.is_authenticated %}
+
+                    {% else %}
+                      {% url 'accounts:login' %}
+                    {% endif %}" target="_blank">Subscribe to RSS Feed</a></p>
+        <p><a class="btn btn-outline-primary" href="{% if request.user.is_authenticated %}
+
+                    {% else %}
+                      {% url 'accounts:login' %}
+                    {% endif %}">add your posts</a></p>
+        {% block search %}
+        {% endblock %}
+        {% block profile %}
+        {% endblock %}
+      </div>
+      <!-- facebook comment -->
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=314700825747438&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+    </div>
+  </div>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
