@@ -23,6 +23,7 @@ from django.urls import path, include
 urlpatterns = [
   path('admin/', admin.site.urls),
   path('accounts/', include('askfm.accounts.urls')),
+  path('', include('askfm.question.urls')),
   url(r'^oauth/', include('social_django.urls', namespace='social')),
   path('tinymce/', include('tinymce.urls')),
   url('avatar/', include('avatar.urls')),
