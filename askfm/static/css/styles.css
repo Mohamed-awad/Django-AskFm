@@ -1,14 +1,13 @@
 body{
-  background-color: #e9eef1;
+  background-color: #2F353A;
   margin: 0px;
   padding: 0px;
 }
 
 @media (min-width: 1200px){
-.container {
-  width: 1170px;
-}
-
+  .container {
+    width: 1170px;
+  }
 }
 
 * {
@@ -17,101 +16,48 @@ body{
   box-sizing: border-box;
 }
 
-.row {
-  margin-right: -15px;
-  margin-left: -15px;
+.navbar-nav .nav-item {
+  padding-right: 30px;
 }
 
-.col-xs-12 {
-  width: 100%;
+.nn {
+  font-size: 25px;
+  color: #929497 !important;
 }
 
-.blog-grids {
-  overflow: hidden;
-  margin: 0 -15px;
+i {
+  cursor: pointer;
 }
 
-.blog-grids .grid {
-  background-color: #fff;
-  width: calc(33.33% - 30px);
-  float: left;
-  padding: 15px;
-  margin: 20px 15px 15px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-}
-.blog-grids-detail {
-  overflow: hidden;
-  margin: 0 -15px;
+.nn i:hover {
+  color: #FF643C;
 }
 
-.blog-grids-detail .grid-detail {
-  background-color: #fff;
-  width: calc(66.66% - 30px);
-  float: left;
-  padding: 15px;
-  margin: 20px 15px 15px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+.active {
+  color: #FF643C;
 }
 
-.entry-media img {
-  border-radius: 10px;
-  width: 100%;
-  max-height: 188px;
+.set-menu .m {
+  color: white !important;
+  margin: 8px;
+  border-radius: 5px;
+  background-color: red;
+  cursor: pointer !important;
 }
 
-.entry-body {
-  padding: 27px 10px;
-}
-
-.entry-body .cat {
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: #6220d9;
-  text-transform: uppercase;
-}
-
-.entry-body h3 {
-  font-size: 21px;
-  font-weight: 600;
-  line-height: 1.30em;
-  margin: 3px 0 0.73em;
-}
-
-.entry-body h3 a {
-  color: #41516a;
-}
-
-.entry-body h3 a:hover {
-  color: #6220d9;
-  text-decoration: none;
-}
-
-.entry-body p {
-  margin-bottom: 2em;
-  color: #90949a;
-  line-height: 1.8em;
-}
-
-.read-more-date {
-  position: relative;
-}
-
-.read-more-date a {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-size: 1.06667rem;
-  font-weight: 600;
-  color: #41516a;
-  text-transform: uppercase;
-}
-
-.read-more-date .date {
+.set-menu {
+  display: none;
+  background-color: #FF643C;
+  border-radius: 5%;
   position: absolute;
-  right: 0;
-  color: #90949a;
+  list-style: none;
+  padding: 0;
+}
+
+.con {
+  background-color: white;
+}
+.con p{
+  margin: 0;
+  padding: 10px;
 }

@@ -1,17 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-{% for q in questions %}
-  <P>{{q.id}}</P>
-  <P>{{q.sender}}</P>
-  <P>{{q.body}}</P>
-  <P>{{q.receiver}}</P>
-  <P>{{q.publish}}</P>
-  <hr>
-{% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% load avatar_tags %}
+<style>
+  .av {
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+{% block title %}
+  Feed | AskFm
+{% endblock %}
+
+{% block content %}
+ {% for q in questions %}
+    <div class="con">
+      <h3 style="padding: 20px;">{{q.body}}</h3>
+      <span style="margin-left: 20px;">
+          {% if q.receiver|has_avatar %}
+            {% avatar q.receiver 50 class="av" %}
+          {% endif %}
+      </span>
+      <span style="padding: 20px; font-size: 20px;">{{q.receiver}} {{q.publish}}</span>
+      <h4 style="padding: 20px;">{{q.answer}}</h4>
+      <span style="margin-left: 20px; font-size: 36px; color: #CEC4D7;">
+        <i class='fas fa-heart'></i>
+      </span>
+      <span style=" float: right; margin-right: 20px; font-size: 36px; color: #CEC4D7;">
+        <i class='fas fa-recycle'></i>
+      </span>
+      <hr style="border: 7px solid #CEC4D7; margin: 0">
+    </div>
+  {% endfor %}
+{% endblock %}
