@@ -50,32 +50,23 @@
         </a>
       </li>
       <li class="nav-item">
-        <button style="background-color: #2F353A; border: none; padding-top: 12px;" class="nn nav-link">
-          <i class="fa fa-user-plus"></i>
-        </button>
-        <ul class="set-menu">
-          <li>
-            <a href="#" class="m nav-link">
-              Settings
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'accounts:logout' %}" class="m nav-link">
-              logout
-            </a>
-          </li>
-        </ul>
+        <a href="#" class="nn nav-link">
+          <i class="fa fa-cog"></i>
+        </a>
       </li>
       <li class="nav-item">
         <a style="font-size: 25px; color: #FF643C" href="" class="nav-link">
+          {% if request.user|has_avatar %}
+            {% avatar user 50 class="av" %}
+          {% else %}
+            <img src="media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
+          {% endif %}
           {{ request.user.username }}
         </a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">
-          {% if request.user|has_avatar %}
-            {% avatar user 50 class="av" %}
-          {% endif %}
+        <a href="{% url 'accounts:logout' %}" class="nn nav-link">
+          <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
     </ul>

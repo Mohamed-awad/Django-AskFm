@@ -37,14 +37,6 @@ i {
   color: #FF643C;
 }
 
-.set-menu .m {
-  color: white !important;
-  margin: 8px;
-  border-radius: 5px;
-  background-color: red;
-  cursor: pointer !important;
-}
-
 .set-menu {
   display: none;
   background-color: #FF643C;
@@ -54,10 +46,42 @@ i {
   padding: 0;
 }
 
+.set-menu .m {
+  color: white !important;
+  /*margin: 8px;*/
+  border-radius: 5px;
+  /*background-color: red;*/
+  cursor: pointer !important;
+}
+
 .con {
   background-color: white;
 }
 .con p{
   margin: 0;
   padding: 10px;
+}
+
+.sid_user span {
+  color: #f8f9fa;
+}
+.sid_user img{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.sid_user button{
+  float: right;
+  cursor: pointer;
+  color: #FF643C;
+  background-color: #2F353A;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 2%;
+  padding: 4%;
+}
+.sid_user button:hover{
+  color: white;
+  background-color: #FF643C;
+  border-radius: 45%;
 }

@@ -15,21 +15,52 @@
 {% block content %}
  {% for q in questions %}
     <div class="con">
-      <h3 style="padding: 20px;">{{q.body}}</h3>
+      <h3 style="padding: 20px;">{{q.0.body}}</h3>
       <span style="margin-left: 20px;">
-          {% if q.receiver|has_avatar %}
-            {% avatar q.receiver 50 class="av" %}
+          {% if q.0.receiver|has_avatar %}
+            {% avatar q.0.receiver 50 class="av" %}
+          {% else %}
+            <img src="media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
           {% endif %}
       </span>
-      <span style="padding: 20px; font-size: 20px;">{{q.receiver}} {{q.publish}}</span>
-      <h4 style="padding: 20px;">{{q.answer}}</h4>
-      <span style="margin-left: 20px; font-size: 36px; color: #CEC4D7;">
-        <i class='fas fa-heart'></i>
-      </span>
+      <span style="padding: 20px; font-size: 20px;">{{q.0.receiver}} {{q.0.publish}}</span>
+      <h4 style="padding: 20px;">{{q.0.answer}}</h4>
+      {% if q.1 == 1 %}
+        <a href="{% url 'question:dislike_question' q.0.id %}" >
+          <span style="margin-left: 20px; font-size: 36px; color: #FF643C;">
+            <i class='fas fa-heart'></i>
+          </span>
+        </a>
+      {% else %}
+        <a href="{% url 'question:like_question' q.0.id %}" >
+          <span style="margin-left: 20px; font-size: 36px; color: #CEC4D7;">
+            <i class='fas fa-heart'></i>
+          </span>
+        </a>
+      {% endif %}
+
       <span style=" float: right; margin-right: 20px; font-size: 36px; color: #CEC4D7;">
         <i class='fas fa-recycle'></i>
       </span>
       <hr style="border: 7px solid #CEC4D7; margin: 0">
+    </div>
+  {% endfor %}
+{% endblock %}
+
+{% block sideContent %}
+  <br>
+  {% for u in users %}
+    <div class="sid_user">
+      <span style="margin-left: 20px;">
+          {% if u|has_avatar %}
+            {% avatar u 50 class="av" %}
+          {% else %}
+            <img src="media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
+          {% endif %}
+      </span>
+      <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
+      <button>Ask ></button>
+      <hr style="border: .4px solid #4F5458; margin: 0">
     </div>
   {% endfor %}
 {% endblock %}

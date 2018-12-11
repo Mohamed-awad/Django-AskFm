@@ -1,14 +1,43 @@
-from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import Question
+from django.shortcuts import render
+from .models import Question, Like
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 
 
 def home(request):
   questions = Question.objects.filter(status=True)
   users = User.objects.filter()
+  likes = []
+  for question in questions:
+    like = Like.objects.filter(user=request.user, question=question)
+    if like:
+      likes.append(1)
+    else:
+      likes.append(0)
+  mylist = zip(questions, likes)
   context = {
-    'questions': questions,
+    'questions': mylist,
     'users': users,
   }
   return render(request, 'question/home.html', context)
+
+
+@login_required
+def like_question(request, pk):
+  user = request.user
+  question = Question.objects.get(id=pk)
+  question.likes = question.likes + 1
+  like = Like.objects.get_or_create(user=user, question=question, value=True)
+  return HttpResponseRedirect(reverse_lazy('question:home'))
+
+
+@login_required
+def dislike_question(request, pk):
+  user = request.user
+  question = Question.objects.get(id=pk)
+  question.likes = question.likes - 1
+  like = Like.objects.filter(user=user, question=question, value=True)
+  like.delete()
+  return HttpResponseRedirect(reverse_lazy('question:home'))
