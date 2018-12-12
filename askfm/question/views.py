@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Question, Like
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -7,21 +7,24 @@ from django.urls import reverse_lazy
 
 
 def home(request):
-  questions = Question.objects.filter(status=True)
-  users = User.objects.filter()
-  likes = []
-  for question in questions:
-    like = Like.objects.filter(user=request.user, question=question)
-    if like:
-      likes.append(1)
-    else:
-      likes.append(0)
-  mylist = zip(questions, likes)
-  context = {
-    'questions': mylist,
-    'users': users,
-  }
-  return render(request, 'question/home.html', context)
+  if request.user.is_authenticated:
+    questions = Question.objects.filter(status=True)
+    users = User.objects.filter()
+    likes = []
+    for question in questions:
+      like = Like.objects.filter(user=request.user, question=question)
+      if like:
+        likes.append(1)
+      else:
+        likes.append(0)
+    mylist = zip(questions, likes)
+    context = {
+      'questions': mylist,
+      'users': users,
+    }
+    return render(request, 'question/home.html', context)
+  else:
+    return redirect('/')
 
 
 @login_required

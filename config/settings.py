@@ -153,8 +153,8 @@ SITE_ID = 1
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/home'
+LOGOUT_REDIRECT_URL = '/'
 
 # github keys
 SOCIAL_AUTH_GITHUB_KEY = 'b17986d65f772cfa5204'

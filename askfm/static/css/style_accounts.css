@@ -1,0 +1,75 @@
+body {
+  background-color: white;
+}
+
+.row-head h1{
+  text-align: center;
+  width: 100%;
+}
+
+.row-head  a{
+  color: #8E008B;
+  font-size: 35px;
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: none;
+}
+.row-head a span {
+  font-size: 50px;
+}
+
+.row-body {
+  background-image: url("../imgs/background.svg");
+  width: 100%;
+}
+.row-body div {
+  margin: auto;
+  text-align: center;
+  font-size: 25px;
+  color: white;
+}
+
+.row-body div img{
+  width: 75px;
+  height: 65px;
+}
+
+.row-body div a {
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px 120px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.row-body div .bt1{
+  background-color: white;
+  color: #8E008B;
+  border: none;
+}
+
+.row-body div .bt2{
+  background: none;
+  color: white;
+  border: 1px solid white;
+  padding: 15px 127px;
+}
+
+.footer ul{
+  list-style: none;
+  margin: auto;
+}
+
+.footer ul li{
+  float: left;
+  font-size: 25px;
+  padding: 15px;
+  color: #B1ABB9 !important;
+}
+
+.footer ul li a{
+  cursor: pointer;
+  color: #B1ABB9 !important;
+}
