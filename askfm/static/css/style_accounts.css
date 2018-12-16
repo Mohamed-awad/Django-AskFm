@@ -73,3 +73,100 @@ body {
   cursor: pointer;
   color: #B1ABB9 !important;
 }
+
+.login-head h1{
+  margin-bottom: 0;
+}
+
+.login-head h1 a{
+  color: #FF643C;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-head p{
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 25px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.login-head .sig {
+  color: #FF643C;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.login-head .sig:hover {
+  background-color: #FF643C;
+  color: white;
+}
+
+.login-form {
+  background-color: white;
+  margin: auto;
+}
+
+.login-form p {
+  text-align: center;
+  margin: 0;
+}
+
+.login-form p label{
+  margin: 10px;
+  font-size: 20px;
+}
+
+.login-form p input{
+  width: 75%;
+  font-size: 20px;
+  height: 50px;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.login-form button{
+  width: 75%;
+  background-color: #FF643C;
+  color: white;
+  font-weight: bold;
+  margin: 20px 85px;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+span {
+  color: #B1ABB9;
+}
+
+.login-form li:first-of-type {
+  margin-left: 40px;
+}
+
+.login-form li a{
+  border-radius: 50%;
+  font-size: 40px;
+  margin: 10px 30px 0px 0;
+  width: 77px;
+}
+
+.signup-form ul{
+  list-style: none;
+}
+
+.signup-form ul li{
+  text-align: center;
+}
