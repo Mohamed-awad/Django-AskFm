@@ -9,7 +9,7 @@ class Question(models.Model):
   sender = models.ForeignKey(User, related_name='senders', on_delete=models.CASCADE)
   body = models.TextField()
   receiver = models.ForeignKey(User, related_name='recievers', on_delete=models.CASCADE)
-  answer = models.TextField()
+  answer = models.TextField(default='', blank=True)
   publish = models.DateTimeField(default=timezone.now)
   created = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(auto_now=True)

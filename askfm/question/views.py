@@ -4,6 +4,21 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+import datetime
+
+
+def quest(request):
+  if request.user.is_authenticated:
+    questions = Question.objects.filter(receiver=request.user, answer='')
+    users = User.objects.filter()
+    context = {
+      'questions': questions,
+      'users': users,
+      'now': datetime.datetime.now(),
+    }
+    return render(request, 'question/question.html', context)
+  else:
+    return redirect('/')
 
 
 def home(request):

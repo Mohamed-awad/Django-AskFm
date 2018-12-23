@@ -48,19 +48,57 @@ i {
 
 .set-menu .m {
   color: white !important;
-  /*margin: 8px;*/
   border-radius: 5px;
-  /*background-color: red;*/
   cursor: pointer !important;
 }
 
-.con {
+.con , .con1{
   background-color: white;
 }
 .con p{
   margin: 0;
   padding: 10px;
 }
+
+.con h3, .con1 h3{
+  padding: 20px;
+  width: 80%;
+  display: inline-block;
+}
+.like_dis {
+  float: left;
+}
+.con1 a {
+  float: right;
+  text-decoration: none;
+}
+
+.con1 p{
+  padding-left: 20px;
+  display: inline-block;
+}
+
+.con1 a i {
+  font-size: 20px;
+  color: #929497;
+  margin: 20px 20px;
+}
+
+.con1 .ans {
+  cursor: pointer;
+  color: #FF643C;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 3%;
+  padding: 1%;
+}
+.con1 .ans:hover{
+  color: white;
+  background-color: #FF643C;
+  border-radius: 40%;
+}
+
 
 .sid_user span {
   color: #f8f9fa;

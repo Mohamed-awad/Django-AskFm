@@ -170,3 +170,7 @@ span {
 .signup-form ul li{
   text-align: center;
 }
+
+form input {
+  outline: 1px solid #B1ABB9;
+}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load avatar_tags %}
+<style>
+  .av {
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+{% block title %}
+  Feed | AskFm
+{% endblock %}
+
+{% block content %}
+ {% for q in questions %}
+    <div class="con1">
+      <h3>{{q.body}}</h3>
+      <a href=""><i class="fas fa-trash-alt"></i></a>
+      <br>
+      <p>{{q.created|timesince}}</p>
+      <a class="ans" href="">Answer > </a>
+      <hr style="border: 7px solid #CEC4D7; margin:10px 0 0 0;">
+    </div>
+  {% endfor %}
+{% endblock %}
+
+{% block sideContent %}
+  <br>
+  {% for u in users %}
+    {% if u != request.user %}
+      <div class="sid_user">
+        <span style="margin-left: 20px;">
+            {% if u|has_avatar %}
+              {% avatar u 50 class="av" %}
+            {% else %}
+              <img src="/media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
+            {% endif %}
+        </span>
+        <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
+        <button>Ask ></button>
+        <hr style="border: .4px solid #4F5458; margin: 0">
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block js %}
+  <script>
+    $(document).ready(function(){
+      var x = document.getElementsByTagName('i');
+      $(x[0]).removeClass("active");
+      $(x[1]).addClass("active");
+    });
+  </script>
+{% endblock %}

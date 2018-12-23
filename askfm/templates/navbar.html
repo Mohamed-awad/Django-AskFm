@@ -9,7 +9,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2F353A; padding: 0 0 0 4%;">
   <a class="navbar-brand" style="color: #FF643C;font-size: 25px;
-     font-weight: bold; font-style: italic; margin: 0; " href="">
+     font-weight: bold; font-style: italic; margin: 0; " href="{% url 'question:home' %}">
       <span style="font-size: 40px;">ask</span>fm
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -25,12 +25,12 @@
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nn nav-link" href="#">
+        <a class="nn nav-link" href="{% url 'question:home' %}">
           <i title="feed" class=' active fas fa-home'></i>
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nn nav-link">
+        <a href="{% url 'question:quest' %}" class="nn nav-link">
           <i title="Questions" class='fas fa-question-circle'></i>
         </a>
       </li>

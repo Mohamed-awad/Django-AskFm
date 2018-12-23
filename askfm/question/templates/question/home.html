@@ -16,6 +16,7 @@
  {% for q in questions %}
     <div class="con">
       <h3 style="padding: 20px;">{{q.0.body}}</h3>
+      <br>
       <span style="margin-left: 20px;">
           {% if q.0.receiver|has_avatar %}
             {% avatar q.0.receiver 50 class="av" %}
@@ -23,25 +24,31 @@
             <img src="media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
           {% endif %}
       </span>
-      <span style="padding: 20px; font-size: 20px;">{{q.0.receiver}} {{q.0.publish}}</span>
+      <span style="padding: 20px; font-size: 20px; color: #CEC4D7">
+        {{q.0.receiver}} . {{q.0.publish|timesince}}
+      </span>
+      <br>
       <h4 style="padding: 20px;">{{q.0.answer}}</h4>
+      <div style="height: 50px;">
       {% if q.1 == 1 %}
-        <a href="{% url 'question:dislike_question' q.0.id %}" >
+        <a class="like_dis" href="{% url 'question:dislike_question' q.0.id %}" >
           <span style="margin-left: 20px; font-size: 36px; color: #FF643C;">
             <i class='fas fa-heart'></i>
           </span>
         </a>
       {% else %}
-        <a href="{% url 'question:like_question' q.0.id %}" >
+        <a class="like_dis" href="{% url 'question:like_question' q.0.id %}" >
           <span style="margin-left: 20px; font-size: 36px; color: #CEC4D7;">
             <i class='fas fa-heart'></i>
           </span>
         </a>
       {% endif %}
-
-      <span style=" float: right; margin-right: 20px; font-size: 36px; color: #CEC4D7;">
-        <i class='fas fa-recycle'></i>
-      </span>
+       <a style="float: right" href="" >
+          <span style=" float: right; margin-right: 20px; font-size: 36px; color: #CEC4D7;">
+            <i class='fas fa-recycle'></i>
+          </span>
+       </a>
+      </div>
       <hr style="border: 7px solid #CEC4D7; margin: 0">
     </div>
   {% endfor %}
@@ -50,17 +57,19 @@
 {% block sideContent %}
   <br>
   {% for u in users %}
-    <div class="sid_user">
-      <span style="margin-left: 20px;">
-          {% if u|has_avatar %}
-            {% avatar u 50 class="av" %}
-          {% else %}
-            <img src="/media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
-          {% endif %}
-      </span>
-      <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
-      <button>Ask ></button>
-      <hr style="border: .4px solid #4F5458; margin: 0">
-    </div>
+    {% if u != request.user %}
+      <div class="sid_user">
+        <span style="margin-left: 20px;">
+            {% if u|has_avatar %}
+              {% avatar u 50 class="av" %}
+            {% else %}
+              <img src="/media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
+            {% endif %}
+        </span>
+        <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
+        <button>Ask ></button>
+        <hr style="border: .4px solid #4F5458; margin: 0">
+      </div>
+    {% endif %}
   {% endfor %}
 {% endblock %}
