@@ -13,16 +13,26 @@
 {% endblock %}
 
 {% block content %}
- {% for q in questions %}
-    <div class="con1">
-      <h3>{{q.body}}</h3>
-      <a href="{% url 'question:quest_del' q.id %}"><i class="fas fa-trash-alt"></i></a>
-      <br>
-      <p>{{q.created|timesince}}</p>
-      <a class="ans" href="{% url 'question:Ans_question' q.id %}">Answer > </a>
-      <hr style="border: 7px solid #CEC4D7; margin:10px 0 0 0;">
-    </div>
-  {% endfor %}
+  <div style="background-color: white; text-align: center">
+    <h2>Answer the Question</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <p>
+          {{ field.label_tag }}<br>
+          {{ field }}
+          {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </p>
+      {% endfor %}
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <br><br><br><br><br><br>
+  </div>
 {% endblock %}
 
 {% block sideContent %}

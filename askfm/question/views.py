@@ -5,6 +5,24 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 import datetime
+from django.views.generic import UpdateView
+from .forms import QuestionCreateForm
+
+
+class AnsQuestion(UpdateView):
+  form_class = QuestionCreateForm
+  template_name = 'question/ans_quest.html'
+  success_url = reverse_lazy('question:quest')
+
+  def get_object(self, queryset=None):
+    obj, created = Question.objects.get_or_create(id=self.kwargs['pk'])
+    return obj
+
+
+def quest_del(request, pk):
+  question = Question.objects.get(id=pk)
+  question.delete()
+  return HttpResponseRedirect(reverse_lazy('question:quest'))
 
 
 def quest(request):
