@@ -14,13 +14,13 @@
 
 {% block content %}
   <div style="background-color: white; text-align: center">
-    <h2>Answer the Question</h2>
+    <h2 style="padding-top: 20px; color: #FF643C">Answer the Question</h2>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form %}
         <p>
-          {{ field.label_tag }}<br>
-          {{ field }}
+          <h5 style="margin: 0; padding: 0;">{{ field.label_tag }}</h5>
+          {{ field}}
           {% if field.help_text %}
             <small style="color: grey">{{ field.help_text }}</small>
           {% endif %}
@@ -31,7 +31,7 @@
       {% endfor %}
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
-    <br><br><br><br><br><br>
+    <br>
   </div>
 {% endblock %}
 
@@ -58,9 +58,10 @@
 {% block js %}
   <script>
     $(document).ready(function(){
-      var x = document.getElementsByTagName('i');
-      $(x[0]).removeClass("active");
-      $(x[1]).addClass("active");
+      let x = document.getElementById('id_body');
+      let l = x.textContent.length;
+      l = l/50 + 1;
+      x.rows = ""+l;
     });
   </script>
 {% endblock %}
