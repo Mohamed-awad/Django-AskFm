@@ -1,12 +1,28 @@
 from django.shortcuts import render, redirect
 from .models import Question, Like
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 import datetime
 from django.views.generic import UpdateView
-from .forms import QuestionCreateForm
+from .forms import QuestionCreateForm, NewQuestionForm
+
+
+def add_question(request, pk):
+  if request.method == 'POST':
+    question_form = NewQuestionForm(request.POST, request.FILES)
+    if question_form.is_valid():
+      question = question_form.save(commit=False)
+      question.sender = request.user
+      question.receiver = User.objects.get(id=pk)
+      question.save()
+      return HttpResponseRedirect(reverse_lazy('question:add_question', kwargs={'pk': pk}))
+  elif request.method == 'GET':
+    form = NewQuestionForm()
+    context = {
+      'form': form,
+    }
+    return render(request, 'question/new_question.html', context)
 
 
 class AnsQuestion(UpdateView):
@@ -60,7 +76,6 @@ def home(request):
     return redirect('/')
 
 
-@login_required
 def like_question(request, pk):
   user = request.user
   question = Question.objects.get(id=pk)
@@ -69,7 +84,6 @@ def like_question(request, pk):
   return HttpResponseRedirect(reverse_lazy('question:home'))
 
 
-@login_required
 def dislike_question(request, pk):
   user = request.user
   question = Question.objects.get(id=pk)
@@ -77,3 +91,5 @@ def dislike_question(request, pk):
   like = Like.objects.filter(user=user, question=question, value=True)
   like.delete()
   return HttpResponseRedirect(reverse_lazy('question:home'))
+
+

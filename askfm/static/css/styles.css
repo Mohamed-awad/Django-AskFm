@@ -84,7 +84,7 @@ i {
   margin: 20px 20px;
 }
 
-.con1 .ans {
+.ans {
   cursor: pointer;
   color: #FF643C;
   border: none;
@@ -93,7 +93,7 @@ i {
   margin-right: 3%;
   padding: 1%;
 }
-.con1 .ans:hover{
+.ans:hover{
   color: white;
   background-color: #FF643C;
   border-radius: 40%;
@@ -107,27 +107,22 @@ i {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.sid_user button{
+.sid_user a{
   float: right;
   cursor: pointer;
-  color: #FF643C;
+  color: #FF643C !important;
   background-color: #2F353A;
   border: none;
   font-weight: bold;
   font-size: 20px;
   margin-top: 2%;
   padding: 4%;
+  text-decoration: none;
 }
-.sid_user button:hover{
-  color: white;
+.sid_user a:hover{
+  color: white !important;
   background-color: #FF643C;
   border-radius: 45%;
+  text-decoration: none;
 }
 
-textarea[name='body']{
-  border: none;
-  outline: none;
-  padding-left: 50px;
-  font-size: 25px;
-  text-align: center;
-}

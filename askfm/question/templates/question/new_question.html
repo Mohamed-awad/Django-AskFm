@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load avatar_tags %}
+<style>
+  .av {
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+{% block title %}
+  Feed | AskFm
+{% endblock %}
+
+{% block content %}
+  <div style="background-color: white; padding: 20px;">
+    <h2 style="padding: 20px 20px">ask a question</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <p>
+          {{ field }}
+          {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </p>
+      {% endfor %}
+      <button style="margin-left: 330px;" class="btn btn-primary" type="submit">Ask</button>
+    </form>
+  </div>
+{% endblock %}

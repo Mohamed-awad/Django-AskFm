@@ -18,7 +18,16 @@
       <h3>{{q.body}}</h3>
       <a href="{% url 'question:quest_del' q.id %}"><i class="fas fa-trash-alt"></i></a>
       <br>
-      <p>{{q.created|timesince}}</p>
+      <span style="margin-left: 20px;">
+          {% if q.sender|has_avatar %}
+            {% avatar q.sender 50 class="av" %}
+          {% else %}
+            <img src="media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
+          {% endif %}
+      </span>
+      <span style="padding: 20px; font-size: 20px; color: #CEC4D7">
+        {{q.sender}} . {{q.created|timesince}}
+      </span>
       <a class="ans" href="{% url 'question:Ans_question' q.id %}">Answer > </a>
       <hr style="border: 7px solid #CEC4D7; margin:10px 0 0 0;">
     </div>
@@ -38,7 +47,7 @@
             {% endif %}
         </span>
         <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
-        <button>Ask ></button>
+        <a href="{% url 'question:add_question' u.pk %}">Ask ></a>
         <hr style="border: .4px solid #4F5458; margin: 0">
       </div>
     {% endif %}
