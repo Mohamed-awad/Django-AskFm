@@ -24,3 +24,9 @@ class NewQuestionForm(forms.ModelForm):
   def __init__(self, *args, **kwargs):
     super(NewQuestionForm, self).__init__(*args, **kwargs)
     self.fields['body'].label = 'your Question'
+
+
+class ReAskQuestionForm(forms.ModelForm):
+  class Meta:
+    model = Question
+    fields = ['receiver']

@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% load avatar_tags %}
+<style>
+  .av {
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+{% block title %}
+  Feed | AskFm
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+  <div style="background-color: white; padding: 20px;">
+    <h2 style="padding: 20px 20px">Re ask a question</h2>
+    <h3 style="padding: 10px 20px;">{{ question }}</h3>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <p style="display: inline-block;">
+          <span style="padding: 10px 20px;font-size: 20px;">{{ field.label_tag }}</span>
+          {{ field }}
+          {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </p>
+      {% endfor %}
+      <button style="float: right;" type="submit">
+        <i class="fas fa-location-arrow"></i>
+      </button>
+    </form>
+  </div>
+{% endblock %}

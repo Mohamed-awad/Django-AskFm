@@ -126,3 +126,25 @@ i {
   text-decoration: none;
 }
 
+button{
+  background-color: white;
+  border: 1px solid #FF643C;
+  padding: 10px 20px;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+button i{
+  color: #FF643C;
+  font-size: 25px;
+}
+
+button:hover{
+  color: white;
+  background-color: #FF643C;
+}
+
+button:hover i{
+  color: white;
+  background-color: #FF643C;
+}

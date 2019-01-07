@@ -11,4 +11,5 @@ urlpatterns = [
   url(r'^like_question/(?P<pk>\d+)/$', views.like_question, name='like_question'),
   url(r'^dislike_question/(?P<pk>\d+)/$', views.dislike_question, name='dislike_question'),
   url(r'^add_question/(?P<pk>\d+)/$', views.add_question, name='add_question'),
+  url(r'^re_ask_question/(?P<pk>\d+)/$', views.reAsk_question, name='re_ask_question'),
 ]

@@ -5,8 +5,29 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 import datetime
 from django.views.generic import UpdateView
-from .forms import QuestionCreateForm, NewQuestionForm
+from .forms import QuestionCreateForm, NewQuestionForm, ReAskQuestionForm
 
+
+def reAsk_question(request, pk):
+  question_body = Question.objects.get(id=pk).body,
+  if request.method == 'POST':
+    question_form = ReAskQuestionForm(request.POST, request.FILES)
+    if question_form.is_valid():
+      question = question_form.save(commit=False)
+      question.sender = request.user
+      question.body = question_body[0]
+      question.save()
+      return HttpResponseRedirect(reverse_lazy('question:home'))
+  elif request.method == 'GET':
+    form = ReAskQuestionForm()
+    context = {
+      'form': form,
+      'question': question_body[0],
+    }
+    return render(request, 'question/re_ask_quest.html', context)
+
+
+# ask new question
 
 def add_question(request, pk):
   if request.method == 'POST':
