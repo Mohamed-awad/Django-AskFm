@@ -8,4 +8,5 @@ urlpatterns = [
   url(r'^login/$', auth_view.LoginView.as_view(template_name='accounts/login.html'), name='login'),
   url(r'^logout/$', auth_view.LogoutView.as_view(), name='logout'),
   url(r'^signup/$', core_view.Signup.as_view(), name='signup'),
+  url(r'^profile/(?P<pk>\d+)$', core_view.my_profile, name='my_profile'),
 ]

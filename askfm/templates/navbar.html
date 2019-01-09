@@ -26,7 +26,7 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nn nav-link" href="{% url 'question:home' %}">
-          <i title="feed" class=' active fas fa-home'></i>
+          <i title="feed" class='active fas fa-home'></i>
         </a>
       </li>
       <li class="nav-item">
@@ -35,7 +35,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nn nav-link">
+        <a href="{% url 'accounts:my_profile' request.user.id %}" class="nn nav-link">
           <i title="profile" class='fas fa-user-circle'></i>
         </a>
       </li>
@@ -55,7 +55,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a style="font-size: 25px; color: #FF643C" href="" class="nav-link">
+        <a style="font-size: 25px; color: #FF643C"
+           href="{% url 'accounts:my_profile' request.user.id %}" class="nav-link">
           {% if request.user|has_avatar %}
             {% avatar user 50 class="av" %}
           {% else %}

@@ -16,6 +16,7 @@ class QuestionCreateForm(forms.ModelForm):
     self.fields['body'].widget.attrs['rows'] = '1'
 
 
+
 class NewQuestionForm(forms.ModelForm):
   class Meta:
     model = Question

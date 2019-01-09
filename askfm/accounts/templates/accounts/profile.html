@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load avatar_tags %}
+<style>
+  .av
+  {
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+{% block title %}
+  Feed | AskFm
+{% endblock %}
+
+{% block profile_content %}
+  <div id="topimge" style="margin: 20px 0 40px 0; border-radius: 50px;">
+    <span style="padding-left: 50px;">
+      {% if request.user|has_avatar %}
+        {% avatar user 100 class="av" %}
+      {% else %}
+        <img src="media/avatars/default.jpg" style="width: 100px; height: 100px" class="av">
+      {% endif %}
+    </span>
+    <h1 style="padding-top:10px;margin: 30px 20px 20px 50px;margin-top: 30px;display: inline-block;
+      font-size: 50px;color: white;">{{ request.user.username }}</h1>
+    <span><i style="color: green;" class="fas fa-circle"></i></span>
+    <br>
+    <span style="margin-left: 200px;color: white;">
+      <i class="fas fa-share-square"></i>
+    </span>
+    <span style="color: white;margin-left: 50px;font-size: 20px;">
+      <i class="fas fa-ellipsis-h"></i>
+    </span>
+  </div>
+  <!--<hr style="border: 7px solid #CEC4D7; margin: 20px 0">-->
+{% endblock %}
+
+{% block content %}
+
+ {% for q in questions %}
+    <div class="con">
+      <h3 style="padding: 20px;">{{q.0.body}}</h3>
+      <br>
+      <span style="padding: 20px; font-size: 20px; color: #CEC4D7">
+        {{q.0.publish|timesince}}
+      </span>
+      <br>
+      <h4 style="padding: 20px;">{{q.0.answer}}</h4>
+      <div style="height: 50px;">
+      {% if q.1 == 1 %}
+        <a class="like_dis" href="{% url 'question:dislike_question' q.0.id %}" >
+          <span style="margin-left: 20px; font-size: 36px; color: #FF643C;">
+            <i class='fas fa-heart'></i>
+          </span>
+        </a>
+      {% else %}
+        <a title="Like" class="like_dis" href="{% url 'question:like_question' q.0.id %}" >
+          <span style="margin-left: 20px; font-size: 36px; color: #CEC4D7;">
+            <i class='fas fa-heart'></i>
+          </span>
+        </a>
+      {% endif %}
+       <a title="Re ask" style="float: right" href="{% url 'question:re_ask_question' q.0.id %}">
+          <span style=" float: right; margin-right: 20px; font-size: 36px; color: #CEC4D7;">
+            <i class='fas fa-recycle'></i>
+          </span>
+       </a>
+      </div>
+      <hr style="border: 7px solid #CEC4D7; margin: 0">
+    </div>
+  {% endfor %}
+{% endblock %}
+
+{% block sideContent %}
+  <div class="row" style="color: white;text-align: center;">
+    <div style="width: 30%;display: inline">
+      <div style="display: inline"><i class="fas fa-comment-alt"></i></div>
+      <div>{{ quest_count }}</div>
+      <di>Posts</di>
+    </div>
+    <div style="width: 30%; display: inline;">
+      <div><i class="fab fa-gratipay"></i></div>
+      <div>{{ like_count }}</div>
+      <di>Likes</di>
+    </div>
+    <div style="width: 30%; display: inline;">
+      <div><i class="fas fa-user-friends"></i></i></div>
+      <div>{{ quest_count }}</div>
+      <di>Followers</di>
+    </div>
+  </div>
+  <br>
+  <div class="row" style="color: white;">
+    <div style="width: 50%; text-align: center;">
+      <h4>About Me</h4>
+    </div>
+    <div style="width: 50%; text-align: center">
+      <a href=""><i class="fas fa-pencil-alt"></i>Edit Profile</a>
+    </div>
+    <div style="width:50%; text-align: center;">
+      <h4>{{ request.user }}</h4>
+    </div>
+  </div>
+  <span>________________________________________</span><br>
+  <div class="row footer" style="color: white;">
+    <ul style="list-style: none;margin: 0;padding: 5px; font-size: 30px;">
+      <li style="float: left;margin-left: 10px;">
+        <a href="https://www.facebook.com/askfmpage">
+          <i style="color: white;" class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+      <li style="float: left;margin-left: 10px;">
+        <a href="https://instagram.com/askfm">
+          <i style="color: white;" class="fab fa-instagram"></i>
+        </a>
+      </li>
+      <li style="float: left;margin-left: 10px;">
+        <a href="https://twitter.com/askfm">
+          <i style="color: white;" class="fab fa-twitter"></i>
+        </a>
+      </li>
+      <li style="float: left;margin-left: 10px;">
+        <a href="https://vk.com/askfm">
+          <i style="color: white;" class="fab fa-vk"></i>
+        </a>
+      </li>
+      <li style="float: left;margin-left: 10px;">© Ask.fm 2018</li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script>
+    let topdiv = document.getElementById('topimge');
+    topdiv.style.backgroundImage = 'url("../../static/imgs/background.svg")';
+    $(document).ready(function(){
+      let x = $('.nn i');
+      for(let i = 0 ; i < x.length; i++)
+      {
+        $(x[i]).removeClass("active");
+      }
+      $(x[2]).addClass("active");
+    });
+    </script>
+{% endblock %}
