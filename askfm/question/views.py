@@ -102,8 +102,8 @@ def like_question(request, pk):
   question = Question.objects.get(id=pk)
   question.likes = question.likes + 1
   like = Like.objects.get_or_create(user=user, question=question, value=True)
-  return HttpResponseRedirect(reverse_lazy('question:home'))
-
+  # redirect to the same page user in
+  return redirect(request.META.get('HTTP_REFERER'))
 
 def dislike_question(request, pk):
   user = request.user
@@ -111,6 +111,5 @@ def dislike_question(request, pk):
   question.likes = question.likes - 1
   like = Like.objects.filter(user=user, question=question, value=True)
   like.delete()
-  return HttpResponseRedirect(reverse_lazy('question:home'))
-
+  return redirect(request.META.get('HTTP_REFERER'))
 

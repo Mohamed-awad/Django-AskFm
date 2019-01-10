@@ -59,15 +59,17 @@
   {% for u in users %}
     {% if u != request.user %}
       <div class="sid_user">
-        <span style="margin-left: 20px;">
-            {% if u|has_avatar %}
-              {% avatar u 50 class="av" %}
-            {% else %}
-              <img src="/media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
-            {% endif %}
-        </span>
-        <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
-        <a href="{% url 'question:add_question' u.pk %}">Ask ></a>
+        <a style="text-decoration: none;" href="{% url 'accounts:my_profile' u.pk %}">
+          <span style="margin-left: 20px;">
+              {% if u|has_avatar %}
+                {% avatar u 50 class="av" %}
+              {% else %}
+                <img src="/media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
+              {% endif %}
+          </span>
+          <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
+        </a>
+        <a class="ask_user" href="{% url 'question:add_question' u.pk %}">Ask ></a>
         <hr style="border: .4px solid #4F5458; margin: 0">
       </div>
     {% endif %}

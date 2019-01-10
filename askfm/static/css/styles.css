@@ -107,7 +107,7 @@ i {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.sid_user a{
+.sid_user .ask_user{
   float: right;
   cursor: pointer;
   color: #FF643C !important;
@@ -119,7 +119,7 @@ i {
   padding: 4%;
   text-decoration: none;
 }
-.sid_user a:hover{
+.sid_user .ask_user:hover{
   color: white !important;
   background-color: #FF643C;
   border-radius: 45%;

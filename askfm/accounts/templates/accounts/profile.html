@@ -16,14 +16,14 @@
 {% block profile_content %}
   <div id="topimge" style="margin: 20px 0 40px 0; border-radius: 50px;">
     <span style="padding-left: 50px;">
-      {% if request.user|has_avatar %}
+      {% if user|has_avatar %}
         {% avatar user 100 class="av" %}
       {% else %}
-        <img src="media/avatars/default.jpg" style="width: 100px; height: 100px" class="av">
+        <img src="../../media/avatars/default.jpg" style="width: 100px; height: 100px" class="av">
       {% endif %}
     </span>
     <h1 style="padding-top:10px;margin: 30px 20px 20px 50px;margin-top: 30px;display: inline-block;
-      font-size: 50px;color: white;">{{ request.user.username }}</h1>
+      font-size: 50px;color: white;">{{ user.username }}</h1>
     <span><i style="color: green;" class="fas fa-circle"></i></span>
     <br>
     <span style="margin-left: 200px;color: white;">
@@ -73,21 +73,27 @@
 {% endblock %}
 
 {% block sideContent %}
-  <div class="row" style="color: white;text-align: center;">
+  <div class="row" style="color: white;text-align: center;font-size: 20px;">
     <div style="width: 30%;display: inline">
-      <div style="display: inline"><i class="fas fa-comment-alt"></i></div>
+      <div style="color: #00AEB8;">
+        <i class="fas fa-comment-alt" style="font-size: 30px;"></i>
+      </div>
       <div>{{ quest_count }}</div>
-      <di>Posts</di>
+      <div style="color: #929497;">Posts</div>
     </div>
     <div style="width: 30%; display: inline;">
-      <div><i class="fab fa-gratipay"></i></div>
+      <div style="color: #FF643C;">
+        <i class="fab fa-gratipay" style="font-size: 30px;"></i>
+      </div>
       <div>{{ like_count }}</div>
-      <di>Likes</di>
+      <div style="color: #929497;">Likes</div>
     </div>
     <div style="width: 30%; display: inline;">
-      <div><i class="fas fa-user-friends"></i></i></div>
+      <div style="color: #8E008B;">
+        <i class="fas fa-user-check" style="font-size: 30px;"></i>
+      </div>
       <div>{{ quest_count }}</div>
-      <di>Followers</di>
+      <div style="color: #929497;">Followers</div>
     </div>
   </div>
   <br>
@@ -96,36 +102,40 @@
       <h4>About Me</h4>
     </div>
     <div style="width: 50%; text-align: center">
-      <a href=""><i class="fas fa-pencil-alt"></i>Edit Profile</a>
+      <a style="color: #FF643C; text-decoration: none;" href="">
+        <i class="fas fa-pencil-alt"></i>Edit Profile</a>
     </div>
-    <div style="width:50%; text-align: center;">
-      <h4>{{ request.user }}</h4>
+    <div style="width:100%;">
+      <label style="padding-left: 20px; font-size: 20px;">name:-  </label>
+      <h4 style="display: inline-block;color: #929497;"> {{ request.user }}</h4>
     </div>
   </div>
-  <span>________________________________________</span><br>
-  <div class="row footer" style="color: white;">
+  <br><br>
+  <hr style="border: 1px solid #CEC4D7; margin: 0">
+  <br><br>
+  <div class="row footer">
     <ul style="list-style: none;margin: 0;padding: 5px; font-size: 30px;">
       <li style="float: left;margin-left: 10px;">
         <a href="https://www.facebook.com/askfmpage">
-          <i style="color: white;" class="fab fa-facebook-f"></i>
+          <i style="color: #FF643C;" class="fab fa-facebook-f"></i>
         </a>
       </li>
       <li style="float: left;margin-left: 10px;">
         <a href="https://instagram.com/askfm">
-          <i style="color: white;" class="fab fa-instagram"></i>
+          <i style="color: #FF643C;" class="fab fa-instagram"></i>
         </a>
       </li>
       <li style="float: left;margin-left: 10px;">
         <a href="https://twitter.com/askfm">
-          <i style="color: white;" class="fab fa-twitter"></i>
+          <i style="color: #FF643C;" class="fab fa-twitter"></i>
         </a>
       </li>
       <li style="float: left;margin-left: 10px;">
         <a href="https://vk.com/askfm">
-          <i style="color: white;" class="fab fa-vk"></i>
+          <i style="color: #FF643C;padding: 5px;" class="fab fa-vk"></i>
         </a>
       </li>
-      <li style="float: left;margin-left: 10px;">© Ask.fm 2018</li>
+      <li style="float: left;margin-left: 10px;color: #929497;">© Ask.fm 2018</li>
     </ul>
   </div>
 {% endblock %}
