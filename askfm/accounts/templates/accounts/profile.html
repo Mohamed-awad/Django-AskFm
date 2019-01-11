@@ -7,10 +7,14 @@
 {% block profile_content %}
   <div id="topimge" style="margin: 20px 0 40px 0; border-radius: 50px;">
     <span style="padding-left: 50px;">
-     <img src="../../media/avatars/default.jpg" style="width: 100px; height: 100px">
+     <img src="{% if user.image %}
+                 {{ user.image.url }}
+               {% else %}
+                 {% static 'imgs/default.jpg' %}
+               {% endif %}" style="width: 100px; height: 100px">
     </span>
     <h1 style="padding-top:10px;margin: 30px 20px 20px 50px;margin-top: 30px;display: inline-block;
-      font-size: 50px;color: white;">{{ user.username }}</h1>
+      font-size: 50px;color: white;">{{ user.first_name }} {{ user.last_name }}</h1>
     <span><i style="color: green;" class="fas fa-circle"></i></span>
     <br>
     <span style="margin-left: 200px;color: white;">
@@ -88,13 +92,27 @@
     <div style="width: 50%; text-align: center;">
       <h4>About Me</h4>
     </div>
-    <div style="width: 50%; text-align: center">
-      <a style="color: #FF643C; text-decoration: none;" href="">
-        <i class="fas fa-pencil-alt"></i>Edit Profile</a>
+    {% if request.user.pk == user.pk %}
+      <div style="width: 50%; text-align: center">
+        <a style="color: #FF643C; text-decoration: none;" href="{% url 'accounts:edit_profile' user.pk %}">
+          <i class="fas fa-pencil-alt"></i>Edit Profile</a>
+      </div>
+    {% endif %}
+    <div style="width:100%;">
+      <label style="padding-left: 20px; font-size: 20px;">username:-  </label>
+      <h4 style="display: inline-block;color: #929497;"> {{ user.username }}</h4>
     </div>
     <div style="width:100%;">
-      <label style="padding-left: 20px; font-size: 20px;">name:-  </label>
-      <h4 style="display: inline-block;color: #929497;"> {{ request.user }}</h4>
+      <label style="padding-left: 20px; font-size: 20px;">first name:-  </label>
+      <h4 style="display: inline-block;color: #929497;"> {{ user.first_name }}</h4>
+    </div>
+    <div style="width:100%;">
+      <label style="padding-left: 20px; font-size: 20px;">last name:-  </label>
+      <h4 style="display: inline-block;color: #929497;"> {{ user.last_name }}</h4>
+    </div>
+    <div style="width:100%;">
+      <label style="padding-left: 20px; font-size: 20px;">email:-  </label>
+      <h4 style="display: inline-block;color: #929497;"> {{ user.email }}</h4>
     </div>
   </div>
   <br><br>

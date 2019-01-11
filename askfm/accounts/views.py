@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.shortcuts import render
-from askfm.question.models import Question, Like
+from ..question.models import Question, Like
 from .models import User
 from .forms import EditProfileForm, UserCreateForm
 from django.views.generic import UpdateView
@@ -11,6 +11,14 @@ from django.views.generic import UpdateView
 class Edit_profile(UpdateView):
   form_class = EditProfileForm
   template_name = 'accounts/edit_profile.html'
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    users = User.objects.all()
+    context['users'] = users
+    current_user = User.objects.get(username=self.request.user)
+    context['user_img'] = current_user.image
+    return context
 
   def get_success_url(self):
     return reverse_lazy('accounts:my_profile', kwargs={'pk': self.kwargs['pk']})
@@ -34,11 +42,13 @@ def my_profile(request, pk):
     else:
       likes.append(0)
   mylist = zip(questions, likes)
+  current_user = User.objects.get(username=request.user)
   context = {
     'questions': mylist,
     'like_count': like_count,
     'quest_count': quest_count,
     'user': user,
+    'user_img': current_user.image,
   }
 
   return render(request, 'accounts/profile.html', context)
