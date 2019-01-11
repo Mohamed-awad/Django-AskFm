@@ -1,13 +1,7 @@
 {% load static %}
-{% load avatar_tags %}
-<style>
-  .av {
-    border-radius: 50%;
-    margin: 0;
-    padding: 0;
-  }
-</style>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2F353A; padding: 0 0 0 4%;">
+
+<nav class="navbar navbar-expand-lg navbar-light"
+     style="background-color: #2F353A; padding: 0 0 0 4%;">
   <a class="navbar-brand" style="color: #FF643C;font-size: 25px;
      font-weight: bold; font-style: italic; margin: 0; " href="{% url 'question:home' %}">
       <span style="font-size: 40px;">ask</span>fm
@@ -57,11 +51,7 @@
       <li class="nav-item">
         <a style="font-size: 25px; color: #FF643C"
            href="{% url 'accounts:my_profile' request.user.id %}" class="nav-link">
-          {% if request.user|has_avatar %}
-            {% avatar request.user 50 class="av" %}
-          {% else %}
-            <img src="media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
-          {% endif %}
+            <img src="media/avatars/default.jpg" style="width: 50px; height: 50px">
           {{ request.user.username }}
         </a>
       </li>

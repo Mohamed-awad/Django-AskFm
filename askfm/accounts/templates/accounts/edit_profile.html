@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 <style>
-  textarea[name='body']{
+  input[name='username']{
     border: none;
     outline: none;
-    padding-left: 50px;
     font-size: 25px;
     text-align: center;
+    color: #FF643C;
   }
 </style>
 {% block title %}
@@ -15,7 +15,7 @@
 
 {% block content %}
   <div style="background-color: white; text-align: center">
-    <h2 style="padding-top: 20px; color: #FF643C">Answer the Question</h2>
+    <h2 style="padding-top: 20px; color: #FF643C">Edit your profile</h2>
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form %}
@@ -38,29 +38,3 @@
   </div>
 {% endblock %}
 
-{% block sideContent %}
-  <br>
-  {% for u in users %}
-    {% if u != request.user %}
-      <div class="sid_user">
-        <span style="margin-left: 20px;">
-          <img src="/media/avatars/default.jpg" style="width: 50px; height: 50px">
-        </span>
-        <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
-        <button>Ask ></button>
-        <hr style="border: .4px solid #4F5458; margin: 0">
-      </div>
-    {% endif %}
-  {% endfor %}
-{% endblock %}
-
-{% block js %}
-  <script>
-    $(document).ready(function(){
-      let x = document.getElementById('id_body');
-      let l = x.textContent.length;
-      l = l/50 + 1;
-      x.rows = ""+l;
-    });
-  </script>
-{% endblock %}

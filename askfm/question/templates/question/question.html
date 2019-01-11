@@ -1,13 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load avatar_tags %}
-<style>
-  .av {
-    border-radius: 50%;
-    margin: 0;
-    padding: 0;
-  }
-</style>
 {% block title %}
   Feed | AskFm
 {% endblock %}
@@ -19,11 +11,7 @@
       <a href="{% url 'question:quest_del' q.id %}"><i class="fas fa-trash-alt"></i></a>
       <br>
       <span style="margin-left: 20px;">
-          {% if q.sender|has_avatar %}
-            {% avatar q.sender 50 class="av" %}
-          {% else %}
-            <img src="media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
-          {% endif %}
+          <img src="media/avatars/default.jpg" style="width: 50px; height: 50px">
       </span>
       <span style="padding: 20px; font-size: 20px; color: #CEC4D7">
         {{q.sender}} . {{q.created|timesince}}
@@ -41,11 +29,7 @@
       <div class="sid_user">
         <a style="text-decoration: none;" href="{% url 'accounts:my_profile' u.pk %}">
           <span style="margin-left: 20px;">
-              {% if u|has_avatar %}
-                {% avatar u 50 class="av" %}
-              {% else %}
-                <img src="/media/avatars/default.jpg" style="width: 50px; height: 50px" class="av">
-              {% endif %}
+            <img src="/media/avatars/default.jpg" style="width: 50px; height: 50px">
           </span>
           <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
         </a>

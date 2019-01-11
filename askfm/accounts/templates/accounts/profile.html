@@ -1,14 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load avatar_tags %}
-<style>
-  .av
-  {
-    border-radius: 50%;
-    margin: 0;
-    padding: 0;
-  }
-</style>
 {% block title %}
   Feed | AskFm
 {% endblock %}
@@ -16,11 +7,7 @@
 {% block profile_content %}
   <div id="topimge" style="margin: 20px 0 40px 0; border-radius: 50px;">
     <span style="padding-left: 50px;">
-      {% if user|has_avatar %}
-        {% avatar user 100 class="av" %}
-      {% else %}
-        <img src="../../media/avatars/default.jpg" style="width: 100px; height: 100px" class="av">
-      {% endif %}
+     <img src="../../media/avatars/default.jpg" style="width: 100px; height: 100px">
     </span>
     <h1 style="padding-top:10px;margin: 30px 20px 20px 50px;margin-top: 30px;display: inline-block;
       font-size: 50px;color: white;">{{ user.username }}</h1>

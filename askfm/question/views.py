@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Question, Like
-from django.contrib.auth.models import User
+from askfm.accounts.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 import datetime
@@ -79,7 +79,7 @@ def quest(request):
 def home(request):
   if request.user.is_authenticated:
     questions = Question.objects.filter(status=True)
-    users = User.objects.filter()
+    users = User.objects.all()
     likes = []
     for question in questions:
       like = Like.objects.filter(user=request.user, question=question)
@@ -102,8 +102,10 @@ def like_question(request, pk):
   question = Question.objects.get(id=pk)
   question.likes = question.likes + 1
   like = Like.objects.get_or_create(user=user, question=question, value=True)
+
   # redirect to the same page user in
   return redirect(request.META.get('HTTP_REFERER'))
+
 
 def dislike_question(request, pk):
   user = request.user

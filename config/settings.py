@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'tinymce',
-    'avatar',
     'social_django',
     'askfm.question',
     'askfm.accounts',

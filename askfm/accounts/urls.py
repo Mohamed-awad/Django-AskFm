@@ -9,4 +9,5 @@ urlpatterns = [
   url(r'^logout/$', auth_view.LogoutView.as_view(), name='logout'),
   url(r'^signup/$', core_view.Signup.as_view(), name='signup'),
   url(r'^profile/(?P<pk>\d+)$', core_view.my_profile, name='my_profile'),
+  url(r'^edit-profile/(?P<pk>\d+)$', core_view.Edit_profile.as_view(), name='edit_profile'),
 ]
