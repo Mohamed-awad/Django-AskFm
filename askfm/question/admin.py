@@ -4,7 +4,7 @@ from .models import Question, Like
 
 class QuestionAdmin(admin.ModelAdmin):
   list_display = ('id', 'sender', 'receiver', 'status', 'created',)
-  list_filter = ('sender', 'receiver', 'status', 'created', 'publish')
+  list_filter = ('created', 'publish', 'sender', 'receiver', 'status')
   search_fields = ('sender', 'receiver')
   date_hierarchy = 'publish'
   ordering = ['status', 'publish']

@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 import datetime
 from django.views.generic import UpdateView
 from .forms import QuestionCreateForm, NewQuestionForm, ReAskQuestionForm
+from django.utils import timezone
 
 
 def reAsk_question(request, pk):
@@ -14,7 +15,7 @@ def reAsk_question(request, pk):
     question_form = ReAskQuestionForm(request.POST, request.FILES)
     if question_form.is_valid():
       question = question_form.save(commit=False)
-      question.sender = request.user
+      question.sender = User.objects.get(username=request.user)
       question.body = question_body[0]
       question.save()
       return HttpResponseRedirect(reverse_lazy('question:home'))

@@ -17,7 +17,7 @@ class Question(models.Model):
   likes = models.IntegerField(default=0)
 
   class Meta:
-    ordering = ('-publish',)
+    ordering = ('-updated',)
 
   def __str__(self):
     return str(self.id)
