@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Feed | AskFm
+{% endblock %}
+
+
+{% block content %}
+  <br>
+  <label style="width: 8%"><i style="font-size: 40px;" class="fas fa-search"></i></label>
+  <input placeholder="search your friends by keywords"
+         style="width: 90%; font-size: 20px;padding: 10px;" type="search" name="search_input">
+  <br><br>
+  <h5 style="color: #929497">your Friends</h5>
+ {% for u in users %}
+    <div class="sid_user">
+      <a style="text-decoration: none;" href="{% url 'accounts:my_profile' u.pk %}">
+        <span style="margin-left: 20px;">
+          <img src="{% if u.image %}
+                      {{ u.image.url }}
+                    {% else %}
+                      {% static 'imgs/default.jpg' %}
+                    {% endif %}" style="width: 50px; height: 50px; border-radius: 50%;">
+        </span>
+        <span style="padding: 20px; font-size: 20px;color: #929497">{{u.username}}</span>
+      </a>
+      <a class="ask_user" href="{% url 'question:add_question' u.pk %}">Ask ></a>
+    </div>
+  {% endfor %}
+{% endblock %}
+
+{% block js %}
+  <script>
+    let container = document.getElementsByClassName('col-md-8')[0];
+    container.style.backgroundColor = 'white';
+    $(document).ready(function(){
+      let x = $('.nn i');
+      for(let i = 0 ; i < x.length; i++)
+      {
+        $(x[i]).removeClass("active");
+      }
+      $(x[3]).addClass("active");
+    });
+    </script>
+{% endblock %}

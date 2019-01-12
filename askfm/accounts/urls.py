@@ -10,4 +10,5 @@ urlpatterns = [
   url(r'^signup/$', core_view.Signup.as_view(), name='signup'),
   url(r'^profile/(?P<pk>\d+)$', core_view.my_profile, name='my_profile'),
   url(r'^edit-profile/(?P<pk>\d+)$', core_view.Edit_profile.as_view(), name='edit_profile'),
+  url(r'my-friends/$', core_view.get_friends, name='get_friends'),
 ]

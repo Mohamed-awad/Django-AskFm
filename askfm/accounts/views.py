@@ -7,6 +7,17 @@ from .forms import EditProfileForm, UserCreateForm
 from django.views.generic import UpdateView
 
 
+# friends page
+def get_friends(request):
+  users = User.objects.all()
+  current_user = User.objects.get(username=request.user)
+  context = {
+    'users': users,
+    'user_img': current_user.image,
+  }
+  return render(request, 'accounts/friends.html', context)
+
+
 # edit user profile
 class Edit_profile(UpdateView):
   form_class = EditProfileForm
@@ -58,6 +69,4 @@ class Signup(CreateView):
   form_class = UserCreateForm
   success_url = reverse_lazy('accounts:login')
   template_name = 'accounts/signup.html'
-
-
 

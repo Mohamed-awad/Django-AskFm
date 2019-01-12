@@ -34,7 +34,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nn nav-link">
+        <a href="{% url 'accounts:get_friends' %}" class="nn nav-link">
           <i title="friends" class='fas fa-user-friends'></i>
         </a>
       </li>
@@ -56,7 +56,7 @@
                       {{ user_img.url }}
                     {% else %}
                       {% static 'imgs/default.jpg' %}
-                    {% endif %}" style="width: 50px; height: 50px"
+                    {% endif %}" style="width: 50px; height: 50px; border-radius: 50%;"
           name="{{ request }}">
           {{ request.user.username }}
         </a>

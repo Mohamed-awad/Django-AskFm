@@ -111,12 +111,11 @@ i {
   float: right;
   cursor: pointer;
   color: #FF643C !important;
-  background-color: #2F353A;
   border: none;
   font-weight: bold;
   font-size: 20px;
-  margin-top: 2%;
-  padding: 4%;
+   margin-top: 10px;
+    padding: 12px;
   text-decoration: none;
 }
 .sid_user .ask_user:hover{
