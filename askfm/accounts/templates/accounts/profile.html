@@ -16,6 +16,18 @@
     <h1 style="padding-top:10px;margin: 30px 20px 20px 50px;margin-top: 30px;display: inline-block;
       font-size: 50px;color: white;">{{ user.first_name }} {{ user.last_name }}</h1>
     <span><i style="color: green;" class="fas fa-circle"></i></span>
+
+    {% if flag %}
+      {% if your_friend %}
+        <a href="{% url 'accounts:unfollow' user.pk %}" title="unfollow" style="color: white;float: right;font-size: 40px;margin: 40px;">
+          <i name="unfollow" class="fas fa-user-minus"></i>
+        </a>
+      {% else %}
+        <a href="{% url 'accounts:follow' user.pk %}" title="follow" style="color: white;float: right;font-size: 40px;margin: 40px;">
+          <i name="follow" class="fas fa-user-plus"></i>
+        </a>
+      {% endif %}
+    {% endif %}
     <br><br>
   </div>
   <!--<hr style="border: 7px solid #CEC4D7; margin: 20px 0">-->

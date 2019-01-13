@@ -12,7 +12,7 @@
          style="width: 90%; font-size: 20px;padding: 10px;" type="search" name="search_input">
   <br><br>
   <h5 style="color: #929497">your Friends</h5>
- {% for u in users %}
+ {% for u in friends %}
     <div class="sid_user">
       <a style="text-decoration: none;" href="{% url 'accounts:my_profile' u.pk %}">
         <span style="margin-left: 20px;">
@@ -24,9 +24,16 @@
         </span>
         <span style="padding: 20px; font-size: 20px;color: #929497">{{u.username}}</span>
       </a>
+      <a href="{% url 'accounts:unfollow' u.pk %}" title="unfollow" class="ask_user">
+        <i class="fas fa-user-minus"></i>
+      </a>
       <a class="ask_user" href="{% url 'question:add_question' u.pk %}">Ask ></a>
     </div>
   {% endfor %}
+{% endblock %}
+
+{% block sideContent %}
+  {% include 'question/sideContent.html' %}
 {% endblock %}
 
 {% block js %}

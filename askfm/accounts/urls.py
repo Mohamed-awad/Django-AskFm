@@ -11,4 +11,6 @@ urlpatterns = [
   url(r'^profile/(?P<pk>\d+)$', core_view.my_profile, name='my_profile'),
   url(r'^edit-profile/(?P<pk>\d+)$', core_view.Edit_profile.as_view(), name='edit_profile'),
   url(r'my-friends/$', core_view.get_friends, name='get_friends'),
+  url(r'^follow/(?P<pk>\d+)/$', core_view.follow, name='follow'),
+  url(r'^unfollow/(?P<pk>\d+)/$', core_view.unfollow, name='unfollow'),
 ]

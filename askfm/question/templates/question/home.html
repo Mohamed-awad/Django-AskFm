@@ -49,22 +49,5 @@
 {% endblock %}
 
 {% block sideContent %}
-  <br>
-  <h5 style="color: #929497">your Friends</h5>
-  {% for u in users %}
-    <div class="sid_user">
-      <a style="text-decoration: none;" href="{% url 'accounts:my_profile' u.pk %}">
-        <span style="margin-left: 20px;">
-          <img src="{% if u.image %}
-                      {{ u.image.url }}
-                    {% else %}
-                      {% static 'imgs/default.jpg' %}
-                    {% endif %}" style="width: 50px; height: 50px; border-radius: 50%;">
-        </span>
-        <span style="padding: 20px; font-size: 20px;">{{u.username}}</span>
-      </a>
-      <a class="ask_user" href="{% url 'question:add_question' u.pk %}">Ask ></a>
-      <hr style="border: .4px solid #4F5458; margin: 0">
-    </div>
-  {% endfor %}
+  {% include 'question/sideContent.html' %}
 {% endblock %}

@@ -1,19 +1,30 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from ..question.models import Question, Like
-from .models import User
+from .models import User, Friendship
 from .forms import EditProfileForm, UserCreateForm
 from django.views.generic import UpdateView
 
 
 # friends page
 def get_friends(request):
-  users = User.objects.all()
   current_user = User.objects.get(username=request.user)
+  my_friends = Friendship.objects.filter(creator=current_user)
+  friends = []
+  for friend in my_friends:
+    u = User.objects.get(username=friend.friend)
+    friends.append(u)
+  users = User.objects.all()
+  unfriend_users = []
+  for u in users:
+    if u not in friends:
+      unfriend_users.append(u)
+
   context = {
-    'users': users,
-    'user_img': current_user.image,
+    'users': unfriend_users,
+    'friends': friends,
+    'current_user': current_user,
   }
   return render(request, 'accounts/friends.html', context)
 
@@ -26,9 +37,18 @@ class Edit_profile(UpdateView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     users = User.objects.all()
-    context['users'] = users
     current_user = User.objects.get(username=self.request.user)
-    context['user_img'] = current_user.image
+    my_friends = Friendship.objects.filter(creator=current_user)
+    friends = []
+    for friend in my_friends:
+      u = User.objects.get(username=friend.friend)
+      friends.append(u)
+    unfriend_users = []
+    for u in users:
+      if u not in friends:
+        unfriend_users.append(u)
+    context['users'] = unfriend_users
+    context['current_user'] = current_user
     return context
 
   def get_success_url(self):
@@ -54,12 +74,25 @@ def my_profile(request, pk):
       likes.append(0)
   mylist = zip(questions, likes)
   current_user = User.objects.get(username=request.user)
+
+  your_friend = False
+  friends = Friendship.objects.filter(creator=current_user)
+  for ff in friends:
+    if ff.friend == user:
+      your_friend = True
+
+  flag = True
+  if user == current_user:
+    flag = False
+
   context = {
+    'your_friend': your_friend,
+    'flag': flag,
     'questions': mylist,
     'like_count': like_count,
     'quest_count': quest_count,
     'user': user,
-    'user_img': current_user.image,
+    'current_user': current_user,
   }
 
   return render(request, 'accounts/profile.html', context)
@@ -69,4 +102,21 @@ class Signup(CreateView):
   form_class = UserCreateForm
   success_url = reverse_lazy('accounts:login')
   template_name = 'accounts/signup.html'
+
+
+def follow(request, pk):
+  creator = User.objects.get(username=request.user)
+  friend = User.objects.get(pk=pk)
+  frindship = Friendship.objects.get_or_create(creator=creator, friend=friend)
+
+  # redirect to the same page user in
+  return redirect(request.META.get('HTTP_REFERER'))
+
+
+def unfollow(request, pk):
+  creator = User.objects.get(username=request.user)
+  friend = User.objects.get(pk=pk)
+  friendship = Friendship.objects.filter(creator=creator, friend=friend)
+  friendship.delete()
+  return redirect(request.META.get('HTTP_REFERER'))
 

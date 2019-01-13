@@ -147,3 +147,13 @@ button:hover i{
   color: white;
   background-color: #FF643C;
 }
+
+i[name='follow']:hover
+{
+  color: #FF643C;
+}
+
+i[name='unfollow']:hover
+{
+  color: #FF643C;
+}

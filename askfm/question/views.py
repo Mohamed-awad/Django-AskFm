@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Question, Like
-from ..accounts.models import User
+from ..accounts.models import User, Friendship
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 import datetime
 from django.views.generic import UpdateView
 from .forms import QuestionCreateForm, NewQuestionForm, ReAskQuestionForm
-from django.utils import timezone
 
 
 def reAsk_question(request, pk):
@@ -23,11 +22,20 @@ def reAsk_question(request, pk):
     form = ReAskQuestionForm()
     current_user = User.objects.get(username=request.user)
     users = User.objects.all()
+    my_friends = Friendship.objects.filter(creator=current_user)
+    friends = []
+    for friend in my_friends:
+      u = User.objects.get(username=friend.friend)
+      friends.append(u)
+    unfriend_users = []
+    for u in users:
+      if u not in friends:
+        unfriend_users.append(u)
     context = {
       'form': form,
       'question': question_body[0],
-      'user_img': current_user.image,
-      'users': users,
+      'current_user': current_user,
+      'users': unfriend_users,
     }
     return render(request, 'question/re_ask_quest.html', context)
 
@@ -47,10 +55,19 @@ def add_question(request, pk):
     form = NewQuestionForm()
     current_user = User.objects.get(username=request.user)
     users = User.objects.all()
+    my_friends = Friendship.objects.filter(creator=current_user)
+    friends = []
+    for friend in my_friends:
+      u = User.objects.get(username=friend.friend)
+      friends.append(u)
+    unfriend_users = []
+    for u in users:
+      if u not in friends:
+        unfriend_users.append(u)
     context = {
       'form': form,
-      'user_img': current_user.image,
-      'users': users,
+      'current_user': current_user,
+      'users': unfriend_users,
     }
     return render(request, 'question/new_question.html', context)
 
@@ -62,10 +79,19 @@ class AnsQuestion(UpdateView):
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    users = User.objects.all()
-    context['users'] = users
     current_user = User.objects.get(username=self.request.user)
-    context['user_img'] = current_user.image
+    users = User.objects.all()
+    my_friends = Friendship.objects.filter(creator=current_user)
+    friends = []
+    for friend in my_friends:
+      u = User.objects.get(username=friend.friend)
+      friends.append(u)
+    unfriend_users = []
+    for u in users:
+      if u not in friends:
+        unfriend_users.append(u)
+    context['users'] = unfriend_users
+    context['current_user'] = current_user
     return context
 
   def get_object(self, queryset=None):
@@ -84,11 +110,20 @@ def quest(request):
     questions = Question.objects.filter(receiver=request.user, answer='')
     users = User.objects.all()
     current_user = User.objects.get(username=request.user)
+    my_friends = Friendship.objects.filter(creator=current_user)
+    friends = []
+    for friend in my_friends:
+      u = User.objects.get(username=friend.friend)
+      friends.append(u)
+    unfriend_users = []
+    for u in users:
+      if u not in friends:
+        unfriend_users.append(u)
     context = {
       'questions': questions,
-      'users': users,
+      'users': unfriend_users,
       'now': datetime.datetime.now(),
-      'user_img': current_user.image,
+      'current_user': current_user,
     }
     return render(request, 'question/question.html', context)
   else:
@@ -97,25 +132,41 @@ def quest(request):
 
 def home(request):
   if request.user.is_authenticated:
+    current_user = User.objects.get(username=request.user)
     questions = Question.objects.filter(status=True)
     users = User.objects.all()
+
     likes = []
     users_images = []
+    filtered_questions = []
+    my_friends = Friendship.objects.filter(creator=current_user)
+    friends = []
+    for friend in my_friends:
+      u = User.objects.get(username=friend.friend)
+      friends.append(u)
+
+    unfriend_users = []
+    for u in users:
+      if u not in friends:
+        unfriend_users.append(u)
+
     for question in questions:
-      like = Like.objects.filter(user=request.user, question=question)
       user = question.receiver
+      if user == current_user or user in friends:
+        filtered_questions.append(question)
+
       question_user = User.objects.filter(username=user)[0]
       users_images.append(question_user)
+      like = Like.objects.filter(user=request.user, question=question)
       if like:
         likes.append(1)
       else:
         likes.append(0)
-    mylist = zip(questions, likes, users_images)
-    current_user = User.objects.get(username=request.user)
+    mylist = zip(filtered_questions, likes, users_images)
     context = {
       'questions': mylist,
-      'users': users,
-      'user_img': current_user.image,
+      'users': unfriend_users,
+      'current_user': current_user,
     }
     return render(request, 'question/home.html', context)
   else:
@@ -139,4 +190,3 @@ def dislike_question(request, pk):
   like = Like.objects.filter(user=user, question=question, value=True)
   like.delete()
   return redirect(request.META.get('HTTP_REFERER'))
-
