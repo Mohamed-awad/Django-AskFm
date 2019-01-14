@@ -66,7 +66,7 @@ def my_profile(request, pk):
   like_count = 0
   quest_count = len(questions)
   for question in questions:
-    like = Like.objects.filter(user=user, question=question)
+    like = Like.objects.filter(user=request.user, question=question)
     if like:
       likes.append(1)
       like_count += 1
